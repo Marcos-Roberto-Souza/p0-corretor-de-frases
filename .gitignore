@@ -1,0 +1,15 @@
+# Ambiente virtual e arquivos do editor
+.venv/
+.idea/
+.vscode/
+
+# Cache do Python
+__pycache__/
+*.pyc
+
+#Configuração local com dados privados conforme o enunciado do projeto:
+#nunca vai para o repositório
+.env
+
+# Imagens do Docker para ser exportadas para devel tem que ser
+*.tar
