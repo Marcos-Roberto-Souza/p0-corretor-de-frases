@@ -1,0 +1,1 @@
+""" Corretor de frases (PT/EN) com LLM via Ollama."""
