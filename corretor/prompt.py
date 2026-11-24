@@ -49,5 +49,5 @@ def montar_instrucao(idioma: str) -> str:
         frase = validar_frase(frase)
         return [
             {"role": "system", "content": montar_instrucao(idioma)},
-            {"role": "user", "content", frase},
+            {"role": "user", "content": frase},
         ]
