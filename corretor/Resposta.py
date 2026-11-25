@@ -49,3 +49,14 @@ class Correcao:
             )
         return Correcao(frase_corrigida=frase, explicacao=explicacao)
         
+        
+    def tratar_resposta(resposta) -> Correcao:
+        """
+            Faz o camino completo: extraindo, limpando, confere se não é vazia a menssagem e separa.
+        """
+        texto = limpar_texto(extrair_texto(resposta))
+        if not texto:
+            raise RespostaInvalida(
+                "O modelo devolveu uma resposta vazia. Tente novamente. tratar_resposta"
+            )
+        return separar_campos(texto)
