@@ -51,5 +51,5 @@ def montar_mensagens(frase: str, idioma: str) -> list[dict]:
     frase = validar_frase(frase)
     return [
         {"role": "system", "content": montar_instrucao(idioma)},
-        {"role": "user", "content": frase},
+        {"role": "user", "content": f"<frase>{frase}</frase>"},
     ]
