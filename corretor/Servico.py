@@ -1,13 +1,13 @@
 """Fluxo completo de correção, compartilhado pelo terminal e depois pelo Streamlit.
 """
-from corretor.config import Configuração
+from corretor.config import Configuracao
 from corretor.Llm import chamar_modelo
 from corretor.prompt import montar_mensagens
-from corretor.Resposta import Correcao, tratar_resposta
+from corretor.resposta import Correcao, tratar_resposta
 
 def corrigir_frase(frase: str,
                 idioma: str,
-                config: Configuração,
+                config: Configuracao,
                 cliente=None
                 ) -> Correcao:
     """ Valida a entrada, chama a LLM e devolve a correção já tratada."""

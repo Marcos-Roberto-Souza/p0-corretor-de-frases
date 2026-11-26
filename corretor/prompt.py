@@ -42,12 +42,12 @@ def montar_instrucao(idioma: str) -> str:
         "frase corrigida: They were happy yesterday.\n"
         "O que mudou: 'was' virou 'were' (concordância com 'they), maiúscula no inicio da frase e ponto final."
     )
-    
-    # Função para receber o texto digitado e depois devolver a lista de mensagens para enviar ao LLM.
-    def montar_mensagens(frase: str, idioma: str) -> list[dict]:
-        """ Valida a entrada e devolve a lista de mensagens para enviar á LLM. """
-        frase = validar_frase(frase)
-        return [
-            {"role": "system", "content": montar_instrucao(idioma)},
-            {"role": "user", "content": frase},
-        ]
+
+# Função para receber o texto digitado e depois devolver a lista de mensagens para enviar ao LLM.
+def montar_mensagens(frase: str, idioma: str) -> list[dict]:
+    """ Valida a entrada e devolve a lista de mensagens para enviar á LLM. """
+    frase = validar_frase(frase)
+    return [
+        {"role": "system", "content": montar_instrucao(idioma)},
+        {"role": "user", "content": frase},
+    ]
