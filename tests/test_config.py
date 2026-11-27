@@ -51,7 +51,7 @@ def test_verificar_ssl_invalido_e_recusado(monkeypatch):
 
 
 def test_a_chave_nao_aparece_ao_imprimir_a_configuracao(monkeypatch):
-    monkeypatch.setenv("OLLAMA_API_KEY", "chaver-secreta-de-teste")
+    monkeypatch.setenv("OLLAMA_API_KEY", "chave-secreta-de-teste")
     config = carregar_configuracao()
     assert config.api_key == "chave-secreta-de-teste"
     assert "chave-secreta-de-teste" not in repr(config)

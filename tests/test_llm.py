@@ -20,7 +20,7 @@ MENSAGENS = [{"role": "user", "content": "oi"}]
 
 
 def test_devolve_a_resposta_do_modelo(config):
-    cliente = ClienteFalso(reposta=resposta_com("ok"))
+    cliente = ClienteFalso(resposta=resposta_com("ok"))
     assert chamar_modelo(config, MENSAGENS, cliente) == resposta_com("ok")
     
     

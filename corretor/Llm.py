@@ -35,6 +35,8 @@ def criar_cliente(config: Configuracao) -> ollama.Client:
         headers=cabecalhos,
     )
     
+    
+def _erro_para_status(status: int, config: Configuracao) -> Exception:
     # Função que define um código de erro HTTP do servidor e converte para um erro compreensível
     if status in (401, 403):
         if not config.api_key:

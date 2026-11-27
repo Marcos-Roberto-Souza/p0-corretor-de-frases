@@ -1,3 +1,0 @@
-"""
-    Iniciando o teste
-"""

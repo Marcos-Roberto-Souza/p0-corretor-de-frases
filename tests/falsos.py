@@ -8,13 +8,13 @@ class ClienteFalso:
         self.resposta = resposta
         self.erro = erro
         self.chamadas = 0
-        
+
     def chat(self, **kwargs):
         self.chamadas += 1
         if self.erro:
             raise self.erro
         return self.resposta
     
-    def resposta_com(texto: str) -> dict:
-        """ Monta uma resposta no mesmo formato da LLM. """
-        return {"message": {"content": texto}}
+def resposta_com(texto: str) -> dict:
+    """ Monta uma resposta no mesmo formato da LLM. """
+    return {"message": {"content": texto}}
