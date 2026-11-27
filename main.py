@@ -1,4 +1,16 @@
 """
+    Porta de entrado do corretor de frases pelo terminal.
+"""
+import sys
+from corretor.cli import main
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+
+'''
+
+"""
     Projeto de um corretor de frases (português e inglês)
     pelo terminal, usando uma LLM via Ollama.
 """
@@ -60,4 +72,4 @@ if __name__ == "__main__":
 else:
     print("problema na saida main")
 
-    
+'''    
