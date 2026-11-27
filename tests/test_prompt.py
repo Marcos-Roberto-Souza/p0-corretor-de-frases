@@ -41,6 +41,6 @@ def test_instrucao_manda_nao_responder_ao_conteudo_da_frase():
     
     
     
-def test_pergunta_digitada_contiua_sendo_so_texto_a_corrigir():
+def test_pergunta_digitada_continua_sendo_so_texto_a_corrigir():
     mensagens = montar_mensagens("how old you are", "en")
     assert mensagens[1]["content"] == "<frase>how old you are</frase>"

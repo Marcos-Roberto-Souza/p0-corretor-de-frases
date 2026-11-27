@@ -1,7 +1,7 @@
 """Fluxo completo de correção, compartilhado pelo terminal e depois pelo Streamlit.
 """
 from corretor.config import Configuracao
-from corretor.Llm import chamar_modelo
+from corretor.llm import chamar_modelo
 from corretor.prompt import montar_mensagens
 from corretor.resposta import Correcao, tratar_resposta
 
