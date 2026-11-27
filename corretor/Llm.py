@@ -85,7 +85,7 @@ def chamar_modelo(config: Configuracao, mensagens: list[dict], cliente=None):
     except(ConnectionError, httpx.HTTPError):
         raise FalhaDeComunicacao(
             "Não foi possível conectar ao servidor. Confira OLLAMA_HOST, "
-            " e a rede e  se o servidor está rodando."
+            "a rede e se o servidor está rodando."
         ) from None
         
         
