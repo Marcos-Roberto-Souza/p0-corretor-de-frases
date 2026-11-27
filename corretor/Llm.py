@@ -45,11 +45,11 @@ def _erro_para_status(status: int, config: Configuracao) -> Exception:
                 "Defina a variável OLLAMA_API_KEY."
             )
         return CredencialInvalida(
-            "O servidor recusou a credencial. Confira o valor de OLLAMA_API_KEY."
+            "O servidor recusou a credencial. Confira o valor de OLLAMA_API_KEY. "
         )
     if status == 404:
         return ConfiguracaoInvalida(
-            f"Omodelo '{config.modelo}' não foi encontrado no servidor. "
+            f"O modelo '{config.modelo}' não foi encontrado no servidor. "
             "Confira a variável OLLAMA_MODEL."
         )
     if status in (502, 503, 504):
@@ -79,7 +79,7 @@ def chamar_modelo(config: Configuracao, mensagens: list[dict], cliente=None):
         raise _erro_para_status(erro.status_code, config) from None
     except httpx.TimeoutException:
         raise TempoEsgotado(
-            f"O servidor não respondeu em {config.timeout:g} segundos."
+            f"O servidor não respondeu em {config.timeout:g} segundos. "
             "Tente de novo ou aumente OLLAMA_TIMEOUT."
         ) from None
     except(ConnectionError, httpx.HTTPError):
