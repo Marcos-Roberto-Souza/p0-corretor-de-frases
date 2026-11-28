@@ -32,13 +32,13 @@ def test_log_nao_contem_a_frase_a_resposta_nem_dados_de_acesso(config_com_chave)
     assert "servidor-de-teste" not in texto
     
     
-    def test_log_registra_o_tipo_do_erro_sem_o_corpo_da_resposta(config):
-        cliente = ClienteFalso(erro=ollama.ResponseError("<html>corpo</html>", 504))
-        with pytest.raises(ServidorIndisponivel):
-            corrigir_frase("oi", "pt", config, cliente)
-        texto = "\n".join(registros)
-        assert "ServidorIndisponivel" in texto
-        assert "<html>" not in texto
+def test_log_registra_o_tipo_do_erro_sem_o_corpo_da_resposta(config):
+    cliente = ClienteFalso(erro=ollama.ResponseError("<html>corpo</html>", 504))
+    with pytest.raises(ServidorIndisponivel):
+        corrigir_frase("oi", "pt", config, cliente)
+    texto = "\n".join(registros)
+    assert "ServidorIndisponivel" in texto
+    assert "<html>" not in texto
         
         
 def test_resumo_da_configuracao_nao_mostra_endereco_nem_chave(config_com_chave):
