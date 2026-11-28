@@ -11,6 +11,10 @@ VARIAVEIS = (
     "OLLAMA_TIMEOUT",
     "OLLAMA_VERIFY_SSL",
     "OLLAMA_API_KEY",
+    "OLLAMA_TEMPERATURE",
+    "OLLAMA_MAX_TOKENS",
+    "LOG_LEVEL",
+    "LOG_FILE",
 )
 
 @pytest.fixture(autouse=True)

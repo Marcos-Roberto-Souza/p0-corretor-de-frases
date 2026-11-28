@@ -6,10 +6,15 @@
 # Cache do Python
 __pycache__/
 *.pyc
+.pytest_cache
 
 #Configuração local com dados privados conforme o enunciado do projeto:
 #nunca vai para o repositório
 .env
+
+# Logs da execução
+logs/
+*.log
 
 # Imagens do Docker para ser exportadas para devel tem que ser
 *.tar
