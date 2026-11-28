@@ -2,7 +2,7 @@
 from corretor.erros import EntradaInvalida
 
 # Chave usada no programa -> nome do idioma que vai dentro da instrução enviada para LLM. 
-IDIOMAS = {"pt": "português do Brasil", "en": "inglês"}
+IDIOMAS = {"pt": "português do Brasil. ", "en": "inglês"}
 
 #definindo um tamanho máximo de string para as frases que seram digitadas
 TAMANHO_MAXIMO = 500

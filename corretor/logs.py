@@ -8,7 +8,7 @@ import logging
 from pathlib import Path
 
 NOME = "corretor"
-FORMATO = "%(asctime)s %(levelname)s %(name)s: %(menssage)s"
+FORMATO = "%(asctime)s %(levelname)s %(name)s: %(message)s"
 
 
 """ Função que configura o logger do programa para gravar em um arquivo."""

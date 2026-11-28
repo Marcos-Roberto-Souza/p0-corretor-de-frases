@@ -12,7 +12,7 @@ TEMPERATURA_PADRAO = 0.0
 MAX_TOKENS_PADRAO = 1024
 LOG_NIVEL_PADRAO = "INFO"
 LOG_ARQUIVO_PADRAO = "logs/corretor.log"
-NIVEIS_LOG("DEBUG", "INFO", "WARNING", "ERROR")
+NIVEIS_LOG = ("DEBUG", "INFO", "WARNING", "ERROR")
 
 @dataclass(frozen=True)
 class Configuracao:

@@ -57,6 +57,6 @@ def tratar_resposta(resposta) -> Correcao:
     texto = limpar_texto(extrair_texto(resposta))
     if not texto:
         raise RespostaInvalida(
-            "O modelo devolveu uma resposta vazia. Tente novamente. tratar_resposta"
+            "O modelo devolveu uma resposta vazia. Tente novamente. "
         )
     return separar_campos(texto)

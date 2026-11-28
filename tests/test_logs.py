@@ -25,7 +25,7 @@ def test_log_nao_contem_a_frase_a_resposta_nem_dados_de_acesso(config_com_chave)
         corrigir_frase(frase, "pt", config_com_chave, cliente)
     texto = "\n".join(registros)
     assert "correção iniciada" in texto
-    assert "correção concluida" in texto
+    assert "correção concluída" in texto
     assert frase not in texto
     assert "Texto corrigido secreto" not in texto
     assert "chave-secreta-de-teste" not in texto
@@ -34,8 +34,9 @@ def test_log_nao_contem_a_frase_a_resposta_nem_dados_de_acesso(config_com_chave)
     
 def test_log_registra_o_tipo_do_erro_sem_o_corpo_da_resposta(config):
     cliente = ClienteFalso(erro=ollama.ResponseError("<html>corpo</html>", 504))
-    with pytest.raises(ServidorIndisponivel):
-        corrigir_frase("oi", "pt", config, cliente)
+    with coletar_logs() as registros:
+        with pytest.raises(ServidorIndisponivel):
+            corrigir_frase("oi", "pt", config, cliente)
     texto = "\n".join(registros)
     assert "ServidorIndisponivel" in texto
     assert "<html>" not in texto
@@ -66,4 +67,4 @@ def test_configurar_logs_grava_no_arquivo():
                 handler.close()
             # Devolve o handler silenciosamente, como o corretor/__init__.py deixa.
             logger.addHandler(logging.NullHandler())
-    assert "mensagem de teste" in conteudo
+    assert 'mensagem de teste' in conteudo

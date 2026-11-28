@@ -4,6 +4,7 @@ import logging
 import time
 
 from corretor.config import Configuracao
+from corretor.erros import ErroCorretor
 from corretor.llm import chamar_modelo
 from corretor.prompt import montar_mensagens
 from corretor.resposta import Correcao, tratar_resposta
@@ -25,7 +26,7 @@ def corrigir_frase(frase: str,
     """
     inicio = time.perf_counter()
     logger.info(
-        "correção inicianda: idioma=%s tamanho_da_frase=%d", idioma, len(frase.strip())
+        "correção iniciada: idioma=%s tamanho_da_frase=%d", idioma, len(frase.strip())
     )
     try:
         mensagens = montar_mensagens(frase, idioma)
@@ -37,7 +38,8 @@ def corrigir_frase(frase: str,
             type(erro).__name__,
             time.perf_counter() - inicio,
         )
-        raise logger.info(
-            "correção concluida: duracao=%2fs", time.perf_counter() - inicio
+        raise
+    logger.info(
+        "correção concluída: duracao=%2fs", time.perf_counter() - inicio
         )
     return correcao
