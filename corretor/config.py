@@ -10,6 +10,9 @@ MODELO_PADRAO = "llama3.2"  # Definindo um modelo local padrão se a conexão fa
 TIMEOUT_PADRAO = 60.0  # Definindo um tempo máximo para resposta
 TEMPERATURA_PADRAO = 0.0
 MAX_TOKENS_PADRAO = 1024
+LOG_NIVEL_PADRAO = "INFO"
+LOG_ARQUIVO_PADRAO = "logs/corretor.log"
+NIVEIS_LOG("DEBUG", "INFO", "WARNING", "ERROR")
 
 @dataclass(frozen=True)
 class Configuracao:
@@ -19,11 +22,11 @@ class Configuracao:
     modelo: str
     timeout: float
     verificar_ssl: bool
-    api_key: str = field(
-        default="", repr=False
-    )  # repr=False: se o objeto for impresso, a chave não aparece.
+    api_key: str = field (default="", repr=False)  # repr=False: se o objeto for impresso, a chave não aparece.
     temperatura: float = TEMPERATURA_PADRAO
     max_tokens: int = MAX_TOKENS_PADRAO
+    log_nivel: str = LOG_NIVEL_PADRAO
+    log_arquivo: str = LOG_ARQUIVO_PADRAO
 
     # Função para lê uma variável de ambiente, tirando espaços e aspas das pontas.
 def _ler(nome: str, padrao: str = "") -> str:
@@ -88,6 +91,27 @@ def _ler_max_tokens() -> int:
     return valor
 
 
+
+# Função que lê o nivel dos logs (DEBUG, INFO, WARNING ou ERROR).
+def _ler_nivel_log() -> str:
+    nivel = _ler("LOG_LEVEL", LOG_NIVEL_PADRAO).upper()
+    if nivel not in NIVEIS_LOG:
+        raise ConfiguracaoInvalida(
+            "A variável LOG_LEVEL deve ser DEBUG, INFO, WARNING ou ERROR."
+        )
+    return nivel
+
+
+# Função descreve a configuração para os logs, sem o endereço nem a chave.
+def resumo_seguro(config: Configuracao) -> str:
+    return(
+        f"modelo={config.modelo} timeout={config.timeout:g}s "
+        f"verificar_ssl={config.verificar_ssl} temperatura={config.temperatura:g} "
+        f"max_tokens={config.max_tokens} "
+        f"credencial_configurada={bool(config.api_key)}"
+    )
+
+
     # Função que lê e valida e devolve a configuração do programa.
 def carregar_configuracao() -> Configuracao:
     # Se existir arquivo .env carrega as variáveis dele.
@@ -108,4 +132,6 @@ def carregar_configuracao() -> Configuracao:
         api_key=_ler("OLLAMA_API_KEY"),
         temperatura=_ler_temperatura(),
         max_tokens=_ler_max_tokens(),
+        log_nivel = _ler_nivel_log(),
+        log_arquivo=_ler("LOG_FILE", LOG_ARQUIVO_PADRAO),
     )
