@@ -1,9 +1,11 @@
 """
     Testes com integração simulada: erros do servidor viram mensagens claras.
 """
+import dataclasses
 import httpx
 import ollama
 import pytest
+
 
 from corretor.erros import(
     ConfiguracaoInvalida,
@@ -76,3 +78,13 @@ def test_falha_de_conexao(config):
     with pytest.raises(FalhaDeComunicacao) as info:
         chamar_modelo(config, MENSAGENS, cliente)
     assert "Confira OLLAMA_HOST, a rede e se o servidor está rodando." in str(info.value)
+    
+    
+def test_envia_os_parametro_configurados(config):
+    config = dataclasses.replace(config, temperatura=0.5, max_tokens=100)
+    cliente = ClienteFalso(resposta=resposta_com("ok"))
+    chamar_modelo(config, MENSAGENS, cliente)
+    assert cliente.ultimos_argumentos["options"] == {
+        "temperature": 0.5,
+        "num_predict": 100,
+    }

@@ -14,6 +14,8 @@ def test_usa_os_valores_padrao():
     assert config.timeout == 60.0
     assert config.verificar_ssl is True
     assert config.api_key == ""
+    assert config.temperatura == 0.0
+    assert config.max_tokens == 1024
     
     
 def test_limpa_espaco_e_aspas(monkeypatch):
@@ -55,4 +57,29 @@ def test_a_chave_nao_aparece_ao_imprimir_a_configuracao(monkeypatch):
     config = carregar_configuracao()
     assert config.api_key == "chave-secreta-de-teste"
     assert "chave-secreta-de-teste" not in repr(config)
-            
+    
+
+
+def test_le_os_parametros_do_modelo(monkeypatch):
+    monkeypatch.setenv("OLLAMA_TEMPERATURE", "0.7")
+    monkeypatch.setenv("OLLAMA_MAX_TOKENS", "256")
+    config = carregar_configuracao()
+    assert config.temperatura == 0.7
+    assert config.max_tokens == 256
+    
+    
+    
+    
+@pytest.mark.parametrize("valor", ["abc", "-1", "3"])
+def test_temperatura_invalida_e_recusada(monkeypatch, valor):
+    monkeypatch.setenv("OLLAMA_TEMPERATURE", valor)
+    with pytest.raises(ConfiguracaoInvalida):
+        carregar_configuracao()
+        
+
+
+@pytest.mark.parametrize("valor", ["abc", "0", "-5", "1.5"])
+def test_max_tokens_invalido_e_recusado(monkeypatch, valor):
+    monkeypatch.setenv("OLLAMA_MAX_TOKENS", valor)
+    with pytest.raises(ConfiguracaoInvalida):
+        carregar_configuracao()

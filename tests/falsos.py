@@ -8,9 +8,11 @@ class ClienteFalso:
         self.resposta = resposta
         self.erro = erro
         self.chamadas = 0
+        self.ultimos_argumentos = None
 
     def chat(self, **kwargs):
         self.chamadas += 1
+        self.ultimos_argumentos = kwargs
         if self.erro:
             raise self.erro
         return self.resposta

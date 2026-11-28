@@ -1,0 +1,16 @@
+*   [33md41fc4d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge pull request #1 from Marcos-Roberto-Souza/feature/tratamento-de-erros
+[31m|[m[32m\[m  
+[31m|[m * [33mc4dd54a[m[33m ([m[1;31morigin/feature/tratamento-de-erros[m[33m, [m[1;32mfeature/tratamento-de-erros[m[33m)[m resolvido problemas com variáveis de ambiente e alguns erros de digitação na estrutura do código feito o teste no pytest e passou, não esquecer de acrecentar no relatorio o que foi feito
+[31m|[m * [33m4ee1c55[m O teste feito real teve alguns problemas e foram ajustados, algumas frases não são corrigidas muito bem devido o modelo ser simples e pequeno mas com outro modelo melhor as frases são corrigidas da melhor forma
+[31m|[m * [33m3dc13ac[m renomeando o .env para .env.Example como o enunciado do projeto especifica
+[31m|[m * [33m82d3057[m adicionada a função que ficou faltando nos if dos  erros no arquivo llm.py e e feito os testes e passaram
+[31m|[m * [33md7e5b87[m adicionado arquivo test_servico.py para testar as entradas e as respostas do modelo e do usuário
+[31m|[m * [33mbe94fcc[m adicionado novo teste arquivo test_resposta.py para testar a resposta do modelo e poder tratar os erros
+[31m|[m * [33m6884ec1[m adicionado o arquivo test_config.py na pasta teste para testar a config do protótipo
+[31m|[m * [33m70b0c8e[m adicionado novo arquivo de teste teste.llm, para testar os possiveis erros do modelo e poder corrigir
+[31m|[m * [33m87bb3c8[m validando a primeira seção de teste 1 deu erro foi corrigido e no segundo teste passou, agora falta fazer o teste normal com usuário real
+[31m|[m * [33m94875f7[m criado o arquivo conftest.py e implementado as instruções para o teste com usuário imaginário
+[31m|[m * [33m09a49cb[m adicionado novo arquivo na pasta tests falso.py e __init__.py e declarado o teste falso dentro do arquivo
+[31m|[m * [33ma9fdc1d[m devido alguns erros e boas práticas coloquei o test_prompt.py em uma pasta tests cirada na pasta raiz p0-Projetos e ajustado a função montar_mensagens
+[31m|[m * [33m9569de4[m feito reajuste no prompt devido as instruções e resposta do modelo está se referindo a ele e não a resposta digitada, ajustado o prompt de instrução e criado um arquivo novo para teste com o nome testPrompt.py para testar o protótipo
+[31m|[m * [33mda139c1[m feito os primeiros testes e resolvido alguns conflitos de identação e nomes de variáveis incorretos protótipo rodando, faltando resolver problemas com respostas do modelo

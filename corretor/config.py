@@ -8,7 +8,8 @@ from corretor.erros import ConfiguracaoInvalida
 HOST_PADRAO = "http://localhost:11434"  # Definindo o host padrão
 MODELO_PADRAO = "llama3.2"  # Definindo um modelo local padrão se a conexão falhar
 TIMEOUT_PADRAO = 60.0  # Definindo um tempo máximo para resposta
-
+TEMPERATURA_PADRAO = 0.0
+MAX_TOKENS_PADRAO = 1024
 
 @dataclass(frozen=True)
 class Configuracao:
@@ -21,6 +22,8 @@ class Configuracao:
     api_key: str = field(
         default="", repr=False
     )  # repr=False: se o objeto for impresso, a chave não aparece.
+    temperatura: float = TEMPERATURA_PADRAO
+    max_tokens: int = MAX_TOKENS_PADRAO
 
     # Função para lê uma variável de ambiente, tirando espaços e aspas das pontas.
 def _ler(nome: str, padrao: str = "") -> str:
@@ -53,6 +56,38 @@ def _ler_timeout() -> float:
         )
     return timeout
 
+
+""" Função que lê a temperatura do modelo (de 0 a 2)."""
+def _ler_temperatura() -> float:
+    texto = _ler("OLLAMA_TEMPERATURE", str(TEMPERATURA_PADRAO))
+    try:
+        valor = float(texto)
+    except ValueError:
+        raise ConfiguracaoInvalida(
+            "A variável OLLAMA_TEMPERATURE deve ser um número entre 0 e 2."
+        ) from None
+    if not 0 <= valor <=2:
+        raise ConfiguracaoInvalida(
+            "A variável OLLAMA_TEMPERATURE deve ser um número entre 0 e 2."
+        )
+    return valor
+
+
+
+"""Funçaõ que lê o limite de tokens da resposta (número inteiro maior que zero)."""
+def _ler_max_tokens() -> int:
+    texto = _ler("OLLAMA_MAX_TOKENS", str(MAX_TOKENS_PADRAO))
+    try:
+        valor = int(texto)
+    except ValueError:
+        raise ConfiguracaoInvalida(
+            "A variável OLLAMA_MAX_TOKENS deve ser um número inteiro."
+        ) from None
+    if valor <= 0:
+        raise ConfiguracaoInvalida("A variável OLLAMA_MAX_TOKENS deve ser maior que zero.")
+    return valor
+
+
     # Função que lê e valida e devolve a configuração do programa.
 def carregar_configuracao() -> Configuracao:
     # Se existir arquivo .env carrega as variáveis dele.
@@ -71,4 +106,6 @@ def carregar_configuracao() -> Configuracao:
         timeout=_ler_timeout(),
         verificar_ssl=_ler_booleano("OLLAMA_VERIFY_SSL", True),
         api_key=_ler("OLLAMA_API_KEY"),
+        temperatura=_ler_temperatura(),
+        max_tokens=_ler_max_tokens(),
     )

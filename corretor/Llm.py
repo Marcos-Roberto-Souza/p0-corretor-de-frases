@@ -16,9 +16,6 @@ from corretor.erros import(
     TempoEsgotado,
 )
 
-# Se manter a ** Temperatura baixa ** , terá respostas mais previsíveis, adequadas para correção de texto.
-TEMPERATURA = 0 # Temperatura ajustada para 0
-
 """ Função Cria o cliente do Ollama a partir da configuração."""
 def criar_cliente(config: Configuracao) -> ollama.Client:
     
@@ -73,7 +70,10 @@ def chamar_modelo(config: Configuracao, mensagens: list[dict], cliente=None):
         return cliente.chat(
             model=config.modelo,
             messages=mensagens,
-            options={"temperature": TEMPERATURA},
+            options={
+                "temperature": config.temperatura,
+                "num_predict": config.max_tokens,
+                },
         )
     except ollama.ResponseError as erro:
         raise _erro_para_status(erro.status_code, config) from None

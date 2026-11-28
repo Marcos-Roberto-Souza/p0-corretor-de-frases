@@ -12,5 +12,5 @@ def corrigir_frase(frase: str,
                 ) -> Correcao:
     """ Valida a entrada, chama a LLM e devolve a correção já tratada."""
     mensagens = montar_mensagens(frase, idioma)
-    reposta = chamar_modelo(config, mensagens, cliente)
-    return tratar_resposta(reposta)
+    resposta = chamar_modelo(config, mensagens, cliente)
+    return tratar_resposta(resposta)
