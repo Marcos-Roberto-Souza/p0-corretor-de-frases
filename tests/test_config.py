@@ -16,6 +16,8 @@ def test_usa_os_valores_padrao():
     assert config.api_key == ""
     assert config.temperatura == 0.0
     assert config.max_tokens == 1024
+    assert config.log_nivel == "INFO"
+    assert config.log_arquivo == "logs/corretor.log"
     
     
 def test_limpa_espaco_e_aspas(monkeypatch):
@@ -81,5 +83,22 @@ def test_temperatura_invalida_e_recusada(monkeypatch, valor):
 @pytest.mark.parametrize("valor", ["abc", "0", "-5", "1.5"])
 def test_max_tokens_invalido_e_recusado(monkeypatch, valor):
     monkeypatch.setenv("OLLAMA_MAX_TOKENS", valor)
+    with pytest.raises(ConfiguracaoInvalida):
+        carregar_configuracao()
+        
+        
+        
+def test_le_a_configuracao_de_logs(monkeypatch):
+    monkeypatch.setenv("LOG_LEVEL", "debug")
+    monkeypatch.setenv("LOG_FILE", "meus_logs/execucao.log")
+    config = carregar_configuracao()
+    assert config.log_nivel == "DEBUG"
+    assert config.log_arquivo == "meus_logs/execucao.log"
+    
+    
+
+@pytest.mark.parametrize("valor", ["abc", "trace"])
+def test_nivel_de_log_invalido_e_recusado(monkeypatch, valor):
+    monkeypatch.setenv("LOG_LEVEL", valor)
     with pytest.raises(ConfiguracaoInvalida):
         carregar_configuracao()
